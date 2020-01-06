@@ -1,0 +1,54 @@
+[SETUP]
+; THIS IS THE SETUP FILE FOR 9k6 BAUDRATE
+; by YO3HJV, Adrian
+;DON'T alter anything in this section unless you are
+;sure you know what you are doing!
+COMMAND_PROMPT=cmd:
+COMMAND_CHARACTER_CODE=3
+ESCAPE_CHARACTER_CODE=
+CONV_COMMAND=CONV
+MYCALL_COMMAND="MYCALL "
+UNPROTO_COMMAND="UNPROTO "
+NO_BEACON_COMMAND=BEACON EVERY 0
+
+[INIT_COMMANDS]
+^C^C^C
+;Control mode on.
+TC 1!TS 1
+;Select TNC PKT mode on A band.
+TN 2,0!TN 2,0
+;Waiting for command prompt.
+^M!cmd:!5
+;Repeating the first two commands is not an error!
+ECHO OFF
+; Below we can set the beacon in 10*N seconds. 60 means 600 seconds
+BEACON EVERY 60
+; You can set the beacon text with BTEXT ...
+ECHO OFF
+; You can set the Digipeating function but have to add some other commands
+DIGI OFF
+;Below we setup the RF TNC baudrate
+;If you want 1k2 baud, simply replace "9600" with "1200"
+HBAUD 9600
+GPSTEXT $GPRMC
+LTMON 5
+LTMHEAD ON
+LOC E 0
+MON ON
+MCOM ON
+MSTAMP OFF
+CONOK OFF
+PACLEN 250
+UIDIGI OFF
+UIFLOOD %
+UITRACE %
+XFLOW OFF
+HEADER OFF
+NEWMODE ON
+NOMODE OFF
+
+[EXIT_COMMANDS]
+LTMON 0
+MON OFF
+TC 1
+TN 0,0
